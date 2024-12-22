@@ -1,0 +1,13 @@
+{
+  "name": "hono-oauth",
+  "scripts": {
+    "start:dev": "bun run --hot src/index.ts"
+  },
+  "dependencies": {
+    "hono": "^4.6.14"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "prisma": "^6.1.0"
+  }
+}

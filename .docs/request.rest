@@ -1,0 +1,29 @@
+###
+// UserLoginUseCase
+POST http://localhost:3000/authentications
+Content-Type: application/json
+
+{
+  "username": "adeiskandarzulkarnaen",
+  "password": "secretpassword"
+}
+
+
+###
+// AddUserUseCase
+POST http://localhost:3000/users
+Content-Type: application/json
+Authorization: Bearer xxx
+
+{
+  "username": "adeiskandarzulkarnaen",
+  "password": "secretpassword",
+  "fullname": "Ade Iskandar Zulkarnaen"
+}
+
+
+###
+// Test GET /users
+GET http://localhost:3000/users
+Content-Type: application/json
+Authorization: Bearer xxx

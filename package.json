@@ -1,13 +1,26 @@
 {
   "name": "hono-oauth",
   "scripts": {
-    "start:dev": "bun run --hot src/index.ts"
+    "test": "bun test src/ --watch --coverage",
+    "lint": "eslint \"src/**/*.ts\" --fix",
+    "build": "bun build src/app.ts --outdir dist --root src --target=bun --minify --sourcemap",
+    "build:compile": "bun build src/app.ts --compile --minify --sourcemap --outfile ./dist/compile",
+    "start": "bun run dist/src/app.js",
+    "start:dev": "bun run --hot src/app.ts",
+    "migrate:up": "bunx prisma migrate dev"
   },
   "dependencies": {
-    "hono": "^4.6.14"
+    "@prisma/client": "6.1.0",
+    "hono": "^4.6.14",
+    "instances-container": "^2.0.6",
+    "redis": "^4.7.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.17.0",
     "@types/bun": "latest",
-    "prisma": "^6.1.0"
+    "@types/redis": "^4.0.11",
+    "eslint": "^9.17.0",
+    "prisma": "^6.1.0",
+    "typescript-eslint": "^8.18.1"
   }
 }

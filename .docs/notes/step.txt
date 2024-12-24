@@ -1,0 +1,15 @@
+
+
+- siapkan table test helper
+
+- membuat user domain
+- membuat entities user domain
+- Membuat UserRepository Interface ( ABSTRAK )
+- Membuat AddUserUseCase + Password Hash
+
+- membuat UserRepository -> sesuai usecase
+- edit service locator (container)
+
+
+- edit createServer
+- edit interface

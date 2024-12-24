@@ -12,3 +12,19 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id       String @id @default(uuid())
+  username String @unique @db.VarChar(50)
+  password String @db.Text
+  fullname String @db.VarChar(50)
+
+  @@map("users")
+}
+
+model Authentication {
+  id           String @id @default(uuid())
+  refreshToken String @map("refresh_token") @db.Text
+
+  @@map("authentications")
+}

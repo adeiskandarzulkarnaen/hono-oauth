@@ -12,6 +12,7 @@ import onNotFoundHandler from '@interfaces/http/middlewares/onNotFoundHandler';
 
 // import routes
 import userRoutes from '@interfaces/http/api/users/index';
+import authenticationRoutes from '@interfaces/http/api/authentications';
 
 
 
@@ -25,6 +26,7 @@ const createServer = (container: Container) => {
 
   // * ROUTING
   app.route('/users', userRoutes(container));
+  app.route('/authentications', authenticationRoutes(container));
 
 
   // * GLOBAL ERROR HANDLING

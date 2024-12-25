@@ -3,7 +3,6 @@ import { Container } from 'instances-container';
 import { eRegisterUser } from '@domains/users/entities/RegisterUser';
 import RegisterUserUseCase from '@applications/use_case/RegisterUserUseCase';
 import { mapJsonError } from '@commons/mapping/errorMaping';
-// import jwtAuth from '@interfaces/http/middlewares/jwtAuth';
 
 
 class UserHandler {

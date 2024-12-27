@@ -7,7 +7,7 @@ describe('a UserLogin entities', () => {
     //* Arrange
     const payload = {
       username: 'adeiskandarzulkarnaen'
-    };
+    } as eUserLogin;
 
     //* Action and Assert
     expect(() => new UserLogin(payload)).toThrow('USER_LOGIN.NOT_CONTAIN_NEEDED_PROPERTY');
@@ -18,7 +18,7 @@ describe('a UserLogin entities', () => {
     const payload = {
       username: 'adeiskandarzulkarnaen',
       password: 123
-    };
+    } as unknown as eUserLogin;
 
     //* Action and Assert
     expect(() => new UserLogin(payload)).toThrow('USER_LOGIN.NOT_MEET_DATA_TYPE_SPECIFICATION');

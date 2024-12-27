@@ -7,7 +7,7 @@ describe('a RegisterUser entities', () => {
     const payload = {
       username: 'adeiskandarzulkarnaen',
       password: 'secretpassword',
-    };
+    } as eRegisterUser;
 
     // Action and Assert
     expect(() => new RegisterUser(payload)).toThrow('REGISTER_USER.NOT_CONTAIN_NEEDED_PROPERTY');
@@ -20,7 +20,7 @@ describe('a RegisterUser entities', () => {
       username: 'adeiskandarzulkarnaen',
       fullname: true,
       password: 123,
-    };
+    } as unknown as eRegisterUser;
 
     // Action and Assert
     expect(() => new RegisterUser(payload)).toThrow('REGISTER_USER.NOT_MEET_DATA_TYPE_SPECIFICATION');

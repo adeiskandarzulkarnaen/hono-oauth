@@ -10,17 +10,17 @@ export class RegisterUser {
   public password: string;
   public fullname: string;
 
-  constructor(payload: Record<string, unknown>) {
+  constructor(payload: eRegisterUser) {
     this.verifyPayload(payload);
 
-    const { username, password, fullname } = payload as eRegisterUser;
+    const { username, password, fullname } = payload;
 
     this.username = username;
     this.password = password;
     this.fullname = fullname;
   }
 
-  private verifyPayload(payload: Record<string, unknown>): void {
+  private verifyPayload(payload: eRegisterUser): void {
     const { username, password, fullname } = payload;
 
     // Check for missing properties

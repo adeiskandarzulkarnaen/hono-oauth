@@ -7,15 +7,15 @@ export type eUserLogin = {
 export class UserLogin {
   public username: string;
   public password: string;
-  constructor(payload: Record<string, unknown>){
+  constructor(payload: eUserLogin){
     this.verifyPayload(payload);
 
-    const { username, password } = payload as eUserLogin;
+    const { username, password } = payload;
     this.username = username;
     this.password = password;
   }
 
-  private verifyPayload(payload: Record<string, unknown>): void {
+  private verifyPayload(payload: eUserLogin): void {
     const { username, password } = payload;
 
     if (!username || !password) {

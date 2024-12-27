@@ -1,6 +1,6 @@
 import { describe, it, expect, jest } from 'bun:test';
-import AuthenticationRepository from '@domains/authentications/AuthenticationRepository';
 import LogoutUserUseCase from '../LogoutUserUseCase';
+import AuthenticationRepository from '@domains/authentications/AuthenticationRepository';
 
 describe('LogoutUserUseCase', () => {
   it('should orchestrating the logout user action correctly', async () => {

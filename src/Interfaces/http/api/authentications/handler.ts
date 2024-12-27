@@ -5,6 +5,7 @@ import { eNewAuth } from '@domains/authentications/entities/NewAuth';
 import LoginUserUseCase from '@applications/use_case/LoginUserUseCase';
 import LogoutUserUseCase from '@applications/use_case/LogoutUserUseCase';
 import { mapJsonError } from '@commons/mapping/errorMaping';
+import RegenerateAccessTokenUseCase from '@applications/use_case/RegenerateAccessTokenUseCase';
 
 
 class AuthenticationHandler {
@@ -21,8 +22,23 @@ class AuthenticationHandler {
     c.status(201);
     return c.json({
       status: 'success',
-      message: 'auth login berhasil',
+      message: 'login berhasil',
       data: newAuth
+    });
+  }];
+
+  public putAuthenticationHandlers = [async (c: Context) => {
+    const regenerateAccessTokenUseCase: RegenerateAccessTokenUseCase = this.container.getInstance(RegenerateAccessTokenUseCase.name);
+
+    const payload = await c.req.json().catch(mapJsonError);
+    const accessToken = await regenerateAccessTokenUseCase.execute(payload);
+
+    return c.json({
+      status: 'success',
+      message: 'update accessToken berhasil',
+      data: {
+        accessToken,
+      }
     });
   }];
 

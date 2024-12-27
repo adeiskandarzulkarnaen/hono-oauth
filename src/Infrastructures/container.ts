@@ -20,9 +20,11 @@ import BunBCryptPasswordHash from '@infrastructures/security/BunBCryptPasswordHa
 // use case
 import RegisterUserUseCase from '@applications/use_case/RegisterUserUseCase';
 import LoginUserUseCase from '@applications/use_case/LoginUserUseCase';
+import LogoutUserUseCase from '@applications/use_case/LogoutUserUseCase';
+import RegenerateAccessTokenUseCase from '@applications/use_case/RegenerateAccessTokenUseCase';
+
 import AuthenticationTokenManager from '@applications/security/AuthenticationTokenManager';
 import HonoJwtTokenManager from './security/JwtTokenManager';
-import LogoutUserUseCase from '@applications/use_case/LogoutUserUseCase';
 
 
 // creating container
@@ -92,6 +94,17 @@ container.register([
         { name: 'tokenManager', internal: AuthenticationTokenManager.name },
       ],
     },
+  },
+  {
+    key: RegenerateAccessTokenUseCase.name,
+    Class: RegenerateAccessTokenUseCase,
+    parameter: {
+      injectType: 'destructuring',
+      dependencies: [
+        { name: 'authenticationRepository', internal: AuthenticationRepository.name },
+        { name: 'tokenManager', internal: AuthenticationTokenManager.name },
+      ]
+    }
   },
   {
     key: LogoutUserUseCase.name,

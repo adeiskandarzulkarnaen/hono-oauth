@@ -1,8 +1,14 @@
+/* istanbul ignore file */
+export type TokenPayload = {
+  [key: string]: unknown;
+  username: string;
+  exp?: number;
+};
 
-abstract class AuthenticationTokenManager {
-  abstract createAccessToken(payload: Record<string, unknown>): Promise<string>;
-  abstract createRefreshToken(payload: Record<string, unknown>): Promise<string>;
-  abstract verifyRefreshToken(token: string): Promise<Record<string, unknown>>;
+export abstract class AuthenticationTokenManager {
+  abstract createAccessToken(tokenPayload: TokenPayload): Promise<string>;
+  abstract createRefreshToken(tokenPayload: TokenPayload): Promise<string>;
+  abstract verifyRefreshToken(refreshToken: string): Promise<TokenPayload>;
 };
 
 export default AuthenticationTokenManager;

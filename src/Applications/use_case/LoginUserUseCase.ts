@@ -31,9 +31,8 @@ export class LoginUserUseCase {
     const hashedPassword = await this.userRepository.getPasswordByUsername(username);
     await this.passwordHash.comparePassword(password, hashedPassword);
 
-    const userId = await this.userRepository.getIdByUsername(username);
-    const accessToken = await this.tokenManager.createAccessToken({ userId, username });
-    const refreshToken = await this.tokenManager.createRefreshToken({ userId, username });
+    const accessToken = await this.tokenManager.createAccessToken({ username });
+    const refreshToken = await this.tokenManager.createRefreshToken({ username });
 
     const newAuth = new NewAuth({
       accessToken,

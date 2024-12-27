@@ -24,7 +24,6 @@ describe('LoginUserUseCase', () => {
     // mocking
     const mockUserRepository: Partial<UserRepository> = {
       getPasswordByUsername: jest.fn().mockResolvedValue('encrypted_password'),
-      getIdByUsername: jest.fn().mockResolvedValue('user-123')
     };
     const mockPasswordHash: Partial<PasswordHash> = {
       comparePassword: jest.fn().mockImplementation(() => Promise.resolve()),
@@ -52,9 +51,8 @@ describe('LoginUserUseCase', () => {
     expect(newAuth).toEqual(expectedAuth);
     expect(mockUserRepository.getPasswordByUsername).toBeCalledWith('adeiskandarzulkarnaen');
     expect(mockPasswordHash.comparePassword).toBeCalledWith('secretpassword', 'encrypted_password');
-    expect(mockUserRepository.getIdByUsername).toBeCalledWith('adeiskandarzulkarnaen');
-    expect(mockAuthenticationTokenManager.createAccessToken).toBeCalledWith({ userId: 'user-123', username: 'adeiskandarzulkarnaen' });
-    expect(mockAuthenticationTokenManager.createRefreshToken).toBeCalledWith({ userId: 'user-123', username: 'adeiskandarzulkarnaen' });
+    expect(mockAuthenticationTokenManager.createAccessToken).toBeCalledWith({ username: 'adeiskandarzulkarnaen' });
+    expect(mockAuthenticationTokenManager.createRefreshToken).toBeCalledWith({ username: 'adeiskandarzulkarnaen' });
     expect(mockAuthenticationRepository.addToken).toBeCalledWith(expectedAuth.refreshToken);
   });
 });

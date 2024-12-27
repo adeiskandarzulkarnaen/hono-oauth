@@ -7,6 +7,7 @@ const routes = (handler: AuthenticationHandler): Hono => {
 
   //* ROUTING  "/authentications"
   app.post('/', ...handler.postAuthenticationHandlers);
+  app.put('/', ...handler.putAuthenticationHandlers);
   app.delete('/', ...handler.deleteAuthenticationHandlers);
 
   return app;

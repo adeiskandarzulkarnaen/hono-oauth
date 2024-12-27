@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import prismaClient from '@infrastructures/database/sql/prismaClient';
 
 const AuthenticationsTableTestHelper = {

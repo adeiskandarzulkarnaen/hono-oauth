@@ -29,7 +29,7 @@ class AuthenticationHandler {
   public deleteAuthenticationHandlers = [async (c: Context) => {
     const userLogoutUseCase: LogoutUserUseCase = this.container.getInstance(LogoutUserUseCase.name);
 
-    const payload: Record<string, string> = await c.req.json().catch(mapJsonError);
+    const payload = await c.req.json().catch(mapJsonError);
     await userLogoutUseCase.execute(payload);
 
     return c.json({

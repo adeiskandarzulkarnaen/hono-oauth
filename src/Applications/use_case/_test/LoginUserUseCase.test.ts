@@ -1,4 +1,4 @@
-import { describe, expect, it, jest } from 'bun:test';
+import { describe, it, expect, jest } from 'bun:test';
 
 import LoginUserUseCase from '../LoginUserUseCase';
 import { eUserLogin } from '@domains/users/entities/UserLogin';

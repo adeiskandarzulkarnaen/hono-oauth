@@ -22,6 +22,7 @@ import RegisterUserUseCase from '@applications/use_case/RegisterUserUseCase';
 import LoginUserUseCase from '@applications/use_case/LoginUserUseCase';
 import AuthenticationTokenManager from '@applications/security/AuthenticationTokenManager';
 import HonoJwtTokenManager from './security/JwtTokenManager';
+import LogoutUserUseCase from '@applications/use_case/LogoutUserUseCase';
 
 
 // creating container
@@ -89,6 +90,16 @@ container.register([
         { name: 'authenticationRepository', internal: AuthenticationRepository.name },
         { name: 'passwordHash', internal: PasswordHash.name },
         { name: 'tokenManager', internal: AuthenticationTokenManager.name },
+      ],
+    },
+  },
+  {
+    key: LogoutUserUseCase.name,
+    Class: LogoutUserUseCase,
+    parameter: {
+      injectType: 'destructuring',
+      dependencies: [
+        { name: 'authenticationRepository', internal: AuthenticationRepository.name },
       ],
     },
   },

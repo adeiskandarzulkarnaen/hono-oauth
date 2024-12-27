@@ -7,15 +7,15 @@ export type eNewAuth = {
 export class NewAuth {
   public accessToken: string;
   public refreshToken: string;
-  constructor(payload: Record<string, unknown>) {
+  constructor(payload: eNewAuth) {
     this.verifyPayload(payload);
 
-    const { accessToken, refreshToken } = payload as eNewAuth;
+    const { accessToken, refreshToken } = payload;
     this.accessToken = accessToken;
     this.refreshToken = refreshToken;
   }
 
-  private verifyPayload(payload: Record<string, unknown>): void {
+  private verifyPayload(payload: eNewAuth): void {
     const { accessToken, refreshToken } = payload;
 
     if (!accessToken || !refreshToken) {

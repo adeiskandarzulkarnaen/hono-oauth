@@ -7,7 +7,7 @@ describe('a NewAuth entities', () => {
     //* Arrange
     const payload = {
       accessToken: 'secret_accessToken',
-    };
+    } as eNewAuth;
 
     //* Action and Assert
     expect(() => new NewAuth(payload)).toThrow('NEW_AUTH.NOT_CONTAIN_NEEDED_PROPERTY');
@@ -18,7 +18,7 @@ describe('a NewAuth entities', () => {
     const payload = {
       accessToken: 'secret_accessToken',
       refreshToken: 123,
-    };
+    } as unknown as eNewAuth;
 
     //* Action and Assert
     expect(() => new NewAuth(payload)).toThrow('NEW_AUTH.NOT_MEET_DATA_TYPE_SPECIFICATION');

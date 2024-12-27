@@ -18,7 +18,7 @@ export class AuthenticationRepositorySQLPrisma extends AuthenticationRepository 
     const result = await this.prismaClient.authentication.findFirst({
       where: { refreshToken: token }
     });
-    if (!result)  throw new InvariantError('refreshToken tidak ditemukan');
+    if (!result) throw new InvariantError('refreshToken tidak ditemukan');
   }
 
   async deleteToken(token: string): Promise<void> {

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'bun:test';
 import BunBCryptPasswordHash from '../BunBCryptPasswordHash';
+import AuthenticationError from '@commons/exceptions/AuthenticationError';
 
 describe('BunBCryptPasswordHash', () => {
   describe('hash function', () => {
@@ -17,7 +18,25 @@ describe('BunBCryptPasswordHash', () => {
   });
 
   describe('comparePassword function', () => {
-    it.todo('should throw AuthenticationError if password not match');
-    it.todo('should not return AuthenticationError if password match');
+    it('should throw AuthenticationError if password not match', async () => {
+      //* Arrange
+      const bunBCryptPasswordHash = new BunBCryptPasswordHash();
+      const plainPassword = 'secret_password';
+
+      //* Action and Assert
+      expect(bunBCryptPasswordHash.comparePassword(plainPassword, 'encrypted_password'))
+        .rejects.toThrow(AuthenticationError);
+    });
+
+    it('should not return AuthenticationError if password match', async () => {
+      //* Arrange
+      const bunBCryptPasswordHash = new BunBCryptPasswordHash();
+      const plainPassword = 'secret_password';
+      const encryptedPassword = await bunBCryptPasswordHash.hash(plainPassword);
+
+      //* Action and Assert
+      expect(bunBCryptPasswordHash.comparePassword(plainPassword, encryptedPassword))
+        .resolves.not.toThrow(AuthenticationError);
+    });
   });
 });

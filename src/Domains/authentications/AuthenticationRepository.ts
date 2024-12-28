@@ -1,4 +1,4 @@
-
+/* istanbul ignore next */
 abstract class AuthenticationRepository {
   abstract addToken(token: string): Promise<void>;
   abstract checkTokenAvailability(token: string): Promise<void>;

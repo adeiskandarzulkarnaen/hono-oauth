@@ -5,7 +5,7 @@ import PasswordHash from '@applications/security/PasswordHash';
 
 class BunBCryptPasswordHash extends PasswordHash {
   private readonly password;
-  private readonly saltRound;
+  private readonly saltRound: number;
   constructor(saltRound: number = 10) {
     super();
     this.password = password;
@@ -21,8 +21,12 @@ class BunBCryptPasswordHash extends PasswordHash {
   }
 
   public async comparePassword(plain: string, hashed: string): Promise<void> {
-    const match = await this.password.verify(plain, hashed, 'bcrypt');
-    if (!match) throw new AuthenticationError('credendensial tidak sesuai');
+    try {
+      const match: boolean = await this.password.verify(plain, hashed, 'bcrypt');
+      if (!match) throw new Error();
+    } catch {
+      throw new AuthenticationError('credendensial tidak sesuai');
+    }
   }
 };
 

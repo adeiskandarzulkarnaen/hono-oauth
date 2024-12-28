@@ -18,7 +18,6 @@ describe('InvariantError', () => {
 
     const response = error.getResponse();
     const responseJson = await response.json();
-    console.log(response.headers);
 
     expect(response.status).toEqual(400);
     expect(response.headers.get('Content-Type')).toBe('application/json');

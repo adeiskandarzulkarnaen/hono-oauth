@@ -24,7 +24,7 @@ describe('UserRepositorySQLPrisma', () => {
       const userRepositorySQLPrisma = new UserRepositorySQLPrisma(prismaClient);
 
       //* Action and Assert
-      await expect(userRepositorySQLPrisma.verifyAvailableUsername('adeiskandarzulkarnaen'))
+      expect(userRepositorySQLPrisma.verifyAvailableUsername('adeiskandarzulkarnaen'))
         .rejects.toThrow(InvariantError);
     });
 
@@ -74,6 +74,59 @@ describe('UserRepositorySQLPrisma', () => {
         username: 'adeiskandarzulkarnaen',
         fullname: 'Ade Iskandar Zulkarnaen',
       }));
+    });
+  });
+
+  describe('getPasswordByUsername function', () => {
+    it('should throw InvariantError when username not available', async () => {
+      //* Arrange
+      const userRepositorySQLPrisma = new UserRepositorySQLPrisma(prismaClient);
+
+      //* Action and Assert
+      expect(userRepositorySQLPrisma.getPasswordByUsername('adeiskandarzulkarnaen'))
+        .rejects.toThrow(InvariantError);
+    });
+
+    it("should return user's password when username available", async () => {
+      //* Arrange
+      const userRepositorySQLPrisma = new UserRepositorySQLPrisma(prismaClient);
+      await UsersTableTestHelper.addUser({
+        username: 'adeiskandarzulkarnaen',
+        password: 'secret_password'
+      });
+
+      //* Action
+      const userPassword = await userRepositorySQLPrisma.getPasswordByUsername('adeiskandarzulkarnaen');
+
+      //* Assert
+      expect(userPassword).toEqual('secret_password');
+    });
+  });
+
+  describe('getIdByUsername function', async () => {
+    it('should throw InvariantError when username not available', async () => {
+      //* Arrange
+      const userRepositorySQLPrisma = new UserRepositorySQLPrisma(prismaClient);
+
+      //* Action and Assert
+      expect(userRepositorySQLPrisma.getIdByUsername('adeiskandarzulkarnaen'))
+        .rejects.toThrowError(InvariantError);
+    });
+
+    it('should return userId when username available', async () => {
+      //* Arrange
+      const userRepositorySQLPrisma = new UserRepositorySQLPrisma(prismaClient);
+      await UsersTableTestHelper.addUser({
+
+        username: 'adeiskandarzulkarnaen',
+      });
+
+      //* Action
+      const userId = await userRepositorySQLPrisma.getIdByUsername('adeiskandarzulkarnaen');
+
+      //* Assert
+      expect(typeof userId).toEqual('string');
+      expect(userId).not.toBeNull();
     });
   });
 });

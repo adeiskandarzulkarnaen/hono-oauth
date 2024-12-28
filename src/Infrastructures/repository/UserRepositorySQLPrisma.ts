@@ -31,16 +31,16 @@ class UserRepositorySQLPrisma extends UserRepository {
   }
 
   public async getPasswordByUsername(username: string): Promise<string> {
-    const user = await this.prismaClient.user.findFirst({
+    const user = await this.prismaClient.user.findUnique({
       where: { username }, select: { password: true }
     });
 
-    if (!user?.password) throw new InvariantError('username tidak ditemukan');
+    if (!user) throw new InvariantError('username tidak ditemukan');
     return user.password;
   }
 
   public async getIdByUsername(username: string): Promise<string> {
-    const user = await this.prismaClient.user.findFirst({
+    const user = await this.prismaClient.user.findUnique({
       where: { username }, select: { id: true }
     });
 

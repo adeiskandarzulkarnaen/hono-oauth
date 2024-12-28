@@ -2,9 +2,33 @@
 // RegisterUserUseCase
 POST http://localhost:3000/users
 Content-Type: application/json
-
 {
   "username": "adeiskandarzulkarnaen",
   "password": "secretpassword",
   "fullname": "Ade Iskandar Zulkarnaen"
+}
+
+###
+// LoginUserUseCase
+POST http://localhost:3000/authentications
+Content-Type: application/json
+{
+  "username": "adeiskandarzulkarnaen",
+  "password": "secretpassword",
+}
+
+###
+// RegenerateAccessTokenUseCase
+PUT http://localhost:3000/authentications
+Content-Type: application/json
+{
+  "refreshToken": "xxx"
+}
+
+###
+// RegenerateAccessTokenUseCase
+DELETE http://localhost:3000/authentications
+Content-Type: application/json
+{
+  "refreshToken": "xxx"
 }
